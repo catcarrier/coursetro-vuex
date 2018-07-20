@@ -10,6 +10,7 @@
 
 <style>
 #app {
+  background-color: #eeeeee;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 </style>

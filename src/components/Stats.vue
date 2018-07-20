@@ -2,16 +2,35 @@
   <div class="stats">
     <h1>A different component</h1>
     <p>There are currently {{ countLinks }} links</p>
+
+    <div v-if="countLinks > 0">
+      <button v-on:click="removeAllLinks">Remove all links</button>
+    </div>
+    <p>{{ msg }}</p>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "Stats",
+  data() {
+    return {
+      msg: ""
+    };
+  },
   computed: {
-    ...mapGetters(["countLinks"]),
+    ...mapGetters(["countLinks"])
+  },
+  methods: {
+    ...mapMutations(["REMOVE_All"]),
+    ...mapActions(["removeAll"]),
+    removeAllLinks() {
+      this.removeAll().then(() => {
+        this.msg = "All removed.";
+      });
+    }
   }
 };
 </script>
@@ -31,5 +50,15 @@ li {
 }
 a {
   color: #42b983;
+}
+
+button {
+  padding: 10px;
+  margin-top: 30px;
+  width: 100%;
+  background: none;
+  border: 1px solid lightgray;
+  outline: 0;
+  cursor: pointer;
 }
 </style>
